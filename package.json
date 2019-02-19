@@ -1,8 +1,9 @@
 {
+  "private": true,
   "name": "react-native-album-list",
+  "main": "./AlbumsList.js",
   "version": "0.0.1",
   "description": "Библиотека для выдачи наименований альбомом и кол-во фотографий в них",
-  "main": "AlbumsList.js",
   "bugs": {
     "url": "https://github.com/aspidvip/react-native-album-list/issues"
   },
