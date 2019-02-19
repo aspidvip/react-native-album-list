@@ -16,8 +16,18 @@ and
 
 `import AlbumsList from 'react-native-album-list'`
 
-`AlbumsList.getAlbumList({`
-`count: true,`
-`thumbnail: false,`
-`thumbnailDimensions: false,`
-`}).then(list => console.log(list));`
+```js
+AlbumsList.getAlbumList({
+  count: true,
+  thumbnail: false,
+  thumbnailDimensions: false
+}).then(list => console.log(list));
+```
+
+### Album list options
+
+| Attribute             | Values             | Description                    |
+| --------------------- | ------------------ | ------------------------------ |
+| `count`               | `'true'`/`'false'` | Показывать кол-во фотографий   |
+| `thumbnail`           | `'true'`/`'false'` | Показывать миниатютрные эскизы |
+| `thumbnailDimensions` | `'true'`/`'false'` | Показывать размеры             |
