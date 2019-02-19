@@ -1,15 +1,17 @@
 {
-  "private": true,
   "name": "react-native-album-list",
-  "main": "./AlbumsList.js",
   "version": "0.0.1",
   "description": "Библиотека для выдачи наименований альбомом и кол-во фотографий в них",
+  "scripts": {
+    "test": "command for testing package"
+  },
+  "main": "./AlbumsList.js",
   "bugs": {
     "url": "https://github.com/aspidvip/react-native-album-list/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/aspidvip/react-native-album-list"
+    "url": "git+https://github.com/aspidvip/react-native-album-list"
   },
   "license": "MIT",
   "author": "",
@@ -21,9 +23,6 @@
     "android",
     "ios"
   ],
-  "scripts": {
-    "lint": "eslint ./"
-  },
   "devDependencies": {
     "babel-eslint": "^6.1.2",
     "eslint": "^2.13.1",
