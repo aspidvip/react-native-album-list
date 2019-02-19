@@ -1,0 +1,28 @@
+{
+  "name": "react-native-album-list",
+  "version": "0.0.1",
+  "description": "Библиотека для выдачи наименований альбомом и кол-во фотографий в них",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "license": "MIT",
+  "keywords": [
+    "react-component",
+    "react-native",
+    "album",
+    "gallery",
+    "bucket",
+    "android",
+    "ios"
+  ],
+  "main": "AlbumsList.js",
+  "scripts": {
+    "lint": "eslint ./"
+  },
+  "devDependencies": {
+    "babel-eslint": "^6.1.2",
+    "eslint": "^2.13.1",
+    "eslint-plugin-react": "^4.3.0"
+  }
+}
