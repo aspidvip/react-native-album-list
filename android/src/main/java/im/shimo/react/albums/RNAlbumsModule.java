@@ -121,19 +121,9 @@ public class RNAlbumsModule extends ReactContextBaseJavaModule {
                 "count(" +  MediaStore.Images.ImageColumns.BUCKET_ID + ") as count"
         };
 
-        // We want to order the albums by reverse chronological order. We abuse the
-        // "WHERE" parameter to insert a "GROUP BY" clause into the SQL statement.
-        // The template for "WHERE" parameter is like:
-        //    SELECT ... FROM ... WHERE (%s)
-        // and we make it look like:
-        //    SELECT ... FROM ... WHERE (1) GROUP BY 1,(2)
-        // The "(1)" means true. The "1,(2)" means the first two columns specified
-        // after SELECT. Note that because there is a ")" in the template, we use
-        // "(2" to match it.
         String BUCKET_GROUP_BY = "1) GROUP BY 1,(2";
         String BUCKET_ORDER_BY = "MAX(" + MediaStore.Images.ImageColumns.DATE_TAKEN + ") DESC";
 
-        // Get the base URI for the People table in the Contacts content provider.
 
         Cursor cursor = getReactApplicationContext().getContentResolver().query(
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
