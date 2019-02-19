@@ -12,7 +12,7 @@ and
 
 `react-native link`
 
-# Exemple
+# Example
 
 `import AlbumsList from 'react-native-album-list'`
 
