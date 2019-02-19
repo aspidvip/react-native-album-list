@@ -1,6 +1,6 @@
 # React Native Album List
 
-Этот компонент был скопирован из react-native-albums и немного доработан, чтобы можно было его использовать.
+Этот компонент был скопирован из https://github.com/joltup/react-native-albums и немного доработан, чтобы можно было его использовать.
 
 # Installation
 
