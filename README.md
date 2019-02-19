@@ -16,6 +16,8 @@ and
 
 `import AlbumsList from 'react-native-album-list'`
 
+Получить список альбомов
+
 ```js
 AlbumsList.getAlbumList({
   count: true,
@@ -31,6 +33,8 @@ AlbumsList.getAlbumList({
 | `count`               | `'true'`/`'false'` |
 | `thumbnail`           | `'true'`/`'false'` |
 | `thumbnailDimensions` | `'true'`/`'false'` |
+
+Получить список фотографий
 
 ```js
 AlbumsList.getImageList({
