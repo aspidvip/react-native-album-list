@@ -1,6 +1,6 @@
 # React Native Album List
 
-Этот компонент был скопирован из react-native-albums и немного доработан, чтобы мождно было его использовать.
+Этот компонент был скопирован из react-native-albums и немного доработан, чтобы можно было его использовать.
 
 # Installation
 
@@ -24,10 +24,40 @@ AlbumsList.getAlbumList({
 }).then(list => console.log(list));
 ```
 
-### Album list options
+### getAlbumList options
 
-| Attribute             | Values             | Description                    |
-| --------------------- | ------------------ | ------------------------------ |
-| `count`               | `'true'`/`'false'` | Показывать кол-во фотографий   |
-| `thumbnail`           | `'true'`/`'false'` | Показывать миниатютрные эскизы |
-| `thumbnailDimensions` | `'true'`/`'false'` | Показывать размеры             |
+| Attribute             | Values             |
+| --------------------- | ------------------ |
+| `count`               | `'true'`/`'false'` |
+| `thumbnail`           | `'true'`/`'false'` |
+| `thumbnailDimensions` | `'true'`/`'false'` |
+
+```js
+AlbumsList.getImageList({
+  title: true,
+  name: false,
+  size: true,
+  description: true,
+  location: false,
+  date: true,
+  orientation: true,
+  type: false,
+  album: true,
+  dimensions: false
+}).then(list => console.log(list));
+```
+
+### imageListOptions options
+
+| Attribute     | Values             |
+| ------------- | ------------------ |
+| `title`       | `'true'`/`'false'` |
+| `name`        | `'true'`/`'false'` |
+| `size`        | `'true'`/`'false'` |
+| `description` | `'true'`/`'false'` |
+| `location`    | `'true'`/`'false'` |
+| `date`        | `'true'`/`'false'` |
+| `orientation` | `'true'`/`'false'` |
+| `type`        | `'true'`/`'false'` |
+| `album`       | `'true'`/`'false'` |
+| `dimensions`  | `'true'`/`'false'` |
