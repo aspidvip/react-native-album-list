@@ -6,4 +6,4 @@
 
 Install the package from npm:
 
-`yarn add react-native-album-list` or `npm i --save react-native-album-list`
+`npm i --save react-native-album-list`
