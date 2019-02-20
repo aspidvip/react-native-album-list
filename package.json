@@ -1,6 +1,6 @@
 {
   "name": "react-native-album-list",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Библиотека для получения наименований альбомом и кол-во фотографий",
   "scripts": {
     "test": "command for testing package"

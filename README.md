@@ -1,6 +1,7 @@
 # React Native Album List
 
-Этот компонент был скопирован из https://github.com/shimohq/react-native-albums и немного доработан, чтобы можно было его использовать.
+A library for getting all the titles of photo albums and photos.
+This library was taken https://github.com/shimohq/react-native-albums and modified for further work.
 
 # Installation
 
@@ -16,7 +17,7 @@ and
 
 `import AlbumsList from 'react-native-album-list'`
 
-Получить список альбомов
+Get a list of albums
 
 ```js
 AlbumsList.getAlbumList({
@@ -34,7 +35,7 @@ AlbumsList.getAlbumList({
 | `thumbnail`           | `'true'`/`'false'` |
 | `thumbnailDimensions` | `'true'`/`'false'` |
 
-Получить список фотографий
+Get a list of photos
 
 ```js
 AlbumsList.getImageList({
