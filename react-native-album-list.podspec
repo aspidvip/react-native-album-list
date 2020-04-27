@@ -12,8 +12,8 @@ Pod::Spec.new do |s|
   s.homepage     = package['homepage']
   s.platform     = :ios, "9.0"
 
-  s.source       = { :git => "https://github.com/aspidvip/react-native-album-list", :tag => "#{s.version}" }
-  s.source_files  = "ios/RNAlbumsModule/*.{h,m}"
+  s.source       = { :git => "https://github.com/aspidvip/react-native-album-list.git", :tag => "#{s.version}" }
+  s.source_files  = "ios/RNAlbumsModule⁩/*.{h,m}"
 
   s.dependency 'React'
 end
