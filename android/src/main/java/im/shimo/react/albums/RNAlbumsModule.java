@@ -1,5 +1,6 @@
 package im.shimo.react.albums;
 
+import android.content.ContentUris;
 import android.database.Cursor;
 import android.provider.MediaStore;
 
@@ -13,6 +14,7 @@ import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -117,56 +119,63 @@ public class RNAlbumsModule extends ReactContextBaseJavaModule {
                 MediaStore.Images.ImageColumns.BUCKET_ID,
                 MediaStore.Images.ImageColumns.BUCKET_DISPLAY_NAME,
                 MediaStore.Images.ImageColumns.DATE_TAKEN,
-                MediaStore.Images.ImageColumns.DATA,
-                "count(" +  MediaStore.Images.ImageColumns.BUCKET_ID + ") as count"
+                MediaStore.Images.ImageColumns._ID
         };
 
-        String BUCKET_GROUP_BY = "1) GROUP BY 1,(2";
-        String BUCKET_ORDER_BY = "MAX(" + MediaStore.Images.ImageColumns.DATE_TAKEN + ") DESC";
+        String BUCKET_ORDER_BY = MediaStore.Images.ImageColumns.DATE_TAKEN + " DESC";
 
-
+        
         Cursor cursor = getReactApplicationContext().getContentResolver().query(
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                 PROJECTION_BUCKET,
-                BUCKET_GROUP_BY,
+                null,
                 null,
                 BUCKET_ORDER_BY
         );
 
-        WritableArray list = Arguments.createArray();
+        HashMap<String, WritableMap> map = new HashMap();
         if (cursor != null && cursor.moveToFirst()) {
-            String bucket;
+            String bucketName;
+            String bucketId;
             String date;
-            String data;
-            String count;
-            int bucketColumn = cursor.getColumnIndex(
-                    MediaStore.Images.Media.BUCKET_DISPLAY_NAME);
+            String id;
+
+            int bucketNameColumn = cursor.getColumnIndex(
+                    MediaStore.Images.ImageColumns.BUCKET_DISPLAY_NAME);
+            int bucketIdColumn = cursor.getColumnIndex(
+                    MediaStore.Images.ImageColumns.BUCKET_ID);
             int dateColumn = cursor.getColumnIndex(
-                    MediaStore.Images.Media.DATE_TAKEN);
-            int dataColumn = cursor.getColumnIndex(
-                    MediaStore.Images.Media.DATA);
-            int countColumn = cursor.getColumnIndex("count");
+                    MediaStore.Images.ImageColumns.DATE_TAKEN);
+            int idColumn = cursor.getColumnIndex(
+                    MediaStore.Images.ImageColumns._ID);
             do {
-                // Get the field values
-                bucket = cursor.getString(bucketColumn);
-                date = cursor.getString(dateColumn);
-                data = cursor.getString(dataColumn);
-                count = cursor.getString(countColumn);
+                bucketId = cursor.getString(bucketIdColumn);
 
+                if (map.containsKey(bucketId) == false) {
+                    // Get the field values
+                    bucketName = cursor.getString(bucketNameColumn);
+                    date = cursor.getString(dateColumn);
+                    id = cursor.getString(idColumn);
 
-                WritableMap image = Arguments.createMap();
-                setWritableMap(image, "count", count);
-                setWritableMap(image, "date", date);
-                setWritableMap(image, "cover", "file://" + data);
-                setWritableMap(image, "name", bucket);
+                    WritableMap image = Arguments.createMap();
+                    setWritableMap(image, "count", Integer.toString(getBucketImageCount(bucketId)));
+                    setWritableMap(image, "date", date);
+                    setWritableMap(image, "cover", ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, Long.parseLong(id)).toString());
+                    setWritableMap(image, "name", bucketName);
 
-                list.pushMap(image);
+                    map.put(bucketId, image);
+                }
             } while (cursor.moveToNext());
 
             cursor.close();
         }
 
-        promise.resolve(list);
+        WritableArray output = Arguments.createArray();
+        for (WritableMap image : map.values()) {
+            output.pushMap(image);
+        }
+
+        promise.resolve(output);
     }
 
     private boolean shouldSetField(ReadableMap options, String name) {
@@ -187,5 +196,17 @@ public class RNAlbumsModule extends ReactContextBaseJavaModule {
         column.putString("name", name);
         column.putString("columnName", columnName);
         columns.add(column);
+    }
+
+    private int getBucketImageCount(String bucketId) {
+        Cursor cursor = getReactApplicationContext().getContentResolver().query(
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            null,
+            MediaStore.Images.Media.BUCKET_ID + "=?",
+            new String[]{bucketId},
+            null
+        );
+
+        return ((cursor == null) || (cursor.moveToFirst() == false)) ? 0 : cursor.getCount();
     }
 }
